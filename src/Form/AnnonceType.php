@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Ad;
 use App\Form\ImageType;
+use App\Form\ApplicationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,21 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class AnnonceType extends AbstractType
-{  /**
- * permet la fonfiguration d'un champ
- *
- * @param String $label
- * @param String $placeHolder
- * @param Array $option
- * @return Array
- */
-     private function getConfiguration($label , $placeHolder,$option=[])
-     {
-       return array_merge(['label'=>$label,'attr'=>[
-               'placeholder'=>$placeHolder 
-            ]],$option);
-     }
+class AnnonceType extends ApplicationType
+{ 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

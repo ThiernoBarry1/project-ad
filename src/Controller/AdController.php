@@ -44,6 +44,7 @@ class AdController extends AbstractController
                 $image->setAd($ad);
                 $manager->persist($image);
             }
+            $ad->setAutor($this->getUser());
             // on pouvais utiliser cette méthode .
             //$manager = $this->getDoctrine()->getManager();
             //Mais avec l'insection des dependances on vas plutot utiliser ObjectManager

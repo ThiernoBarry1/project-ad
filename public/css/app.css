@@ -7,3 +7,16 @@ div.ad-title{
     background-size:cover;
     background-position: center center; 
 }
+.avatar{
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
+}
+.avatar-medium{
+    max-width: 80px;
+    max-height: 80px;
+}
+.avatar-mini{
+    max-width: 24px;
+    max-height: 24px;
+}
