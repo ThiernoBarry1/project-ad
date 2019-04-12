@@ -13,6 +13,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -64,6 +65,7 @@ class AccountController extends AbstractController
     /**
      * permet de modifier un profil utilisateur
      *@Route("/account/update",name="account_update")
+     *@IsGranted("ROLE_USER")
      * @return Response
      */
     public function updateProfil(Request $request,ObjectManager $manager){
@@ -83,6 +85,7 @@ class AccountController extends AbstractController
     /**
      * modification du mot de passe
      *@Route("/account/update-password",name="account-update-password")
+     *@IsGranted("ROLE_USER")
      * @return Response
      */
     public function updatePassword(Request $request,ObjectManager $manager,UserPasswordEncoderInterface $encode){
@@ -109,6 +112,7 @@ class AccountController extends AbstractController
     /**
      * le compte de l'utilisateur connecté
      *@Route("/account",name="account_index")
+     *@IsGranted("ROLE_USER")
      * @return Response
      */
     public function  myAccount(){

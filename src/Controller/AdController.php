@@ -10,7 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdController extends AbstractController
@@ -27,7 +29,9 @@ class AdController extends AbstractController
     }
     /**
      * permet de créer une annonce
+     * 
      * @Route("/ads/new",name="new_ad")
+     * @IsGranted("ROLE_USER")
      * @return Response
      */
     public function create(Request $request, ObjectManager $manager)
@@ -68,6 +72,8 @@ class AdController extends AbstractController
     /**
      * permet d'afficher le formulaire d'edition d'une annonce 
      * @Route("ads/{slug}/edit",name="edit_ad")
+     * @Security("is_granted('ROLE_USER') and user === ad.getAutor()",
+     * message="cette annonce ne vous appartient pas vous ne pouvez pas la modifier !")
      * @return Response
      */
    public function edit(Ad $ad,Request $request,ObjectManager $manager)
@@ -113,6 +119,21 @@ class AdController extends AbstractController
        [
            'ad'=>$ad,
        ]);
+    }
+    /**
+     * permet de supprimer une annonce
+     *@Route("ads/{slug}/delete",name="delete_ad")
+     *@Security("is_granted('ROLE_USER') and user === ad.getAutor() ",message="Seule la personne qui a créee cette annonce peut la modifier")
+     * @param Ad $ad
+     * @param ObjectManager $manager
+     * @return void
+     */
+    public function deleteAd(Ad $ad,ObjectManager $manager){
+     $manager->remove($ad);
+     $manager->flush();
+     $this->addFlash("success","l'annonce {$ad->getTitle()} a éte supprimer avec success !");
+     return $this->redirectToRoute("ads_index");
+    
     }
     
 }
