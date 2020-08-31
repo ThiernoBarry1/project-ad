@@ -1,0 +1,10 @@
+{% extends 'base.html.twig'%}
+{%block title %} page d'erreur{% endblock%}
+{% block body%}
+<div class="container">
+    <h1>Oups! la page que vous rechercher est introuvable !</h1>
+    <p>Aucun souci on a surement du mal vous renseinger vous pouvez retourner à l'accueil</p>
+    <a href="{{path('homePage')}}" class="btn btn-primary">Rétour à l'accueil </a>
+    <a href="{{path('ads_index')}}" class="btn btn-primary">toutes les annonces</a>
+</div>
+{% endblock%}

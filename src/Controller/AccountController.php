@@ -27,7 +27,6 @@ class AccountController extends AbstractController
     public function login(AuthenticationUtils $utils)
     {
         $error = $utils->getLastAuthenticationError();
-         dump($error);
         return $this->render('account/login.html.twig',
                             ['hasError'=> $error != null,'error'=>$error]
                         );
@@ -84,6 +83,7 @@ class AccountController extends AbstractController
     }
     /**
      * modification du mot de passe
+     * 
      *@Route("/account/update-password",name="account-update-password")
      *@IsGranted("ROLE_USER")
      * @return Response
